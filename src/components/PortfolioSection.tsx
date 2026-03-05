@@ -6,42 +6,42 @@ const projects = [
     title: "E-Commerce Platform",
     category: "Full Stack Development",
     description: "A high-performance marketplace featuring real-time inventory sync, Stripe integration, and a custom merchant analytics dashboard.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80", // Modern e-commerce UI
+    image: "/webapp1.jpeg",
     gradient: "from-blue-600 to-cyan-500"
   },
   {
     title: "HealthTech Mobile App",
     category: "React Native",
     description: "Cross-platform health monitoring system with biometric data visualization and AI-powered personalized wellness insights.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80", // Medical/Tech interface
+    image: "/webapp2.jpeg",
     gradient: "from-green-500 to-emerald-500"
   },
   {
     title: "Enterprise SaaS Dashboard",
     category: "Data Visualization",
     description: "Complex analytics platform processing millions of data points with interactive charts and real-time operational monitoring.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80", // Business data/charts
+    image: "/webapp3.png",
     gradient: "from-purple-600 to-pink-500"
   },
   {
     title: "Culinary Brand Experience",
     category: "WordPress / Headless",
     description: "A multi-location restaurant digital presence featuring custom reservation logic and a high-conversion online ordering flow.",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80", // Sophisticated restaurant interior/vibe
+    image: "/webapp1.jpeg",
     gradient: "from-orange-500 to-red-500"
   },
   {
     title: "Fintech Brand Identity",
     category: "Brand Design",
     description: "Comprehensive visual identity system for a modern neobank, including logo architecture, typography, and digital assets.",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80", // Abstract fintech/crypto aesthetic
+    image: "/webapp2.jpeg",
     gradient: "from-indigo-600 to-blue-500"
   },
   {
     title: "EdTech Learning System",
     category: "UI/UX Design",
     description: "User-centric LMS platform designed for accessibility, featuring gamified progress tracking and collaborative study tools.",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80", // Education/Laptop setup
+    image: "/webapp3.jpeg",
     gradient: "from-teal-500 to-cyan-500"
   },
 ];
