@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
 const testimonials = [
-  { name: "Sarah Chen", role: "CEO, TechVenture", quote: "Appnix transformed our vision into a world-class platform. Their technical expertise and attention to detail exceeded our expectations.", rating: 5 },
-  { name: "Michael Torres", role: "Founder, HealthFirst", quote: "The mobile app they built has been a game-changer for our business. Professional team, excellent communication, outstanding results.", rating: 5 },
-  { name: "Emily Watson", role: "Marketing Director, GrowFast", quote: "Their digital marketing strategy doubled our online revenue in just 6 months. Truly a partner that understands growth.", rating: 5 },
-  { name: "David Kim", role: "CTO, DataFlow", quote: "The MERN stack solution they delivered handles millions of requests daily without breaking a sweat. Incredible engineering.", rating: 5 },
-  { name: "Jessica Park", role: "Product Manager, EduLearn", quote: "The UI/UX redesign increased our user engagement by 150%. They deeply understand user psychology and modern design.", rating: 5 },
-  { name: "Robert Singh", role: "Owner, RetailPro", quote: "Our WordPress e-commerce site is fast, beautiful, and converts. Appnix delivered beyond what we imagined possible.", rating: 5 },
+  { name: "Rahul Sharma", role: "CEO, TechNova Solutions", quote: "Appnix Technologies built our business website using a modern MERN stack and the performance is outstanding. The platform is fast, scalable, and perfectly optimized for SEO. Their team truly understands how technology drives business growth.", rating: 5 },
+  { name: "Priya Verma", role: "Founder, EduSpark Academy", quote: "Working with Appnix Technologies was a great experience. They designed a clean and professional UI/UX for our learning platform and helped us launch quickly. The website now converts visitors into real students.", rating: 5 },
+  { name: "Amit Kumar", role: "Director, Unity Enterprises", quote: "We needed a professional corporate website and Appnix delivered beyond expectations. The design is modern, mobile responsive, and optimized for search engines. Our online presence has improved significantly.", rating: 5 },
+  { name: "Sneha Kapoor", role: "Marketing Head, GrowEdge Digital", quote: "Their SEO and digital marketing strategy helped us increase our website traffic and generate quality leads. Appnix Technologies combines technical expertise with smart growth strategies.", rating: 5 },
+  { name: "Arjun Mehta", role: "CTO, Mehta Tech Labs", quote: "The MERN stack web application developed by Appnix handles heavy traffic smoothly. Their development approach is modern, secure, and highly scalable. A reliable technology partner for startups.", rating: 5 },
+  { name: "Vikram Singh", role: "Owner, RetailPro", quote: "Appnix built our e-commerce website with excellent speed and user experience. The platform is easy to manage and optimized for conversions. Highly recommended for businesses going digital.", rating: 5 },
 ];
 
 const TestimonialsSection = () => {
