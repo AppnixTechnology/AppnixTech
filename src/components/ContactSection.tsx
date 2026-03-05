@@ -173,7 +173,23 @@ const ContactSection = () => {
                   placeholder="john@example.com"
                 />
               </div>
-
+              <div>
+                <label className="text-sm font-medium mb-2 block">Phone</label>
+                <input
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (/^[0-9]*$/.test(value)) {   // only numbers allowed
+                      setFormData({ ...formData, phone: value });
+                    }
+                  }}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                  placeholder="1234567890"
+                />
+              </div>
               <div>
                 <label className="text-sm font-medium mb-2 block">Subject</label>
                 <input
@@ -205,7 +221,7 @@ const ContactSection = () => {
                 Send Message
                 <Send className="h-4 w-4" />
               </button>
-              </div>
+            </div>
           </motion.form>
         </div>
       </div>
