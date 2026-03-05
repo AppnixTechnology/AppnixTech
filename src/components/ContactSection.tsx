@@ -141,69 +141,72 @@ const handleSubmit = async (e) => {
                   type="text"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Sirf letters aur space allow karega
+                    if (/^[A-Za-z\s]*$/.test(value)) {
+                      setFormData({ ...formData, name: value });
+                    }
+                  }}
+                  pattern="^[A-Za-z\s]+$"
+                  title="Only letters are allowed"
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                   placeholder="John Doe"
                 />
               </div>
+
               <div>
                 <label className="text-sm font-medium mb-2 block">Email</label>
                 <input
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  disabled={isSubmitting}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Email first character letter ya number hona chahiye
+                    if (/^[A-Za-z0-9][A-Za-z0-9._%+-@]*$/.test(value) || value === "") {
+                      setFormData({ ...formData, email: value });
+                    }
+                  }}
+                  pattern="^[A-Za-z0-9][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+                  title="Enter a valid email address"
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                   placeholder="john@example.com"
                 />
               </div>
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Phone</label>
-              <input
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                disabled={isSubmitting}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
-                placeholder="+1 (234) 567-890"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Subject</label>
-              <input
-                type="text"
-                required
-                value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                disabled={isSubmitting}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
-                placeholder="Project Inquiry"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Message</label>
-              <textarea
-                required
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                disabled={isSubmitting}
-                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none disabled:opacity-50"
-                placeholder="Tell us about your project..."
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Sending..." : "Send Message"}
-              <Send className="h-4 w-4" />
-            </button>
+
+              <div>
+                <label className="text-sm font-medium mb-2 block">Subject</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  placeholder="Project Inquiry"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium mb-2 block">Message</label>
+                <textarea
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                  placeholder="Tell us about your project..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              >
+                Send Message
+                <Send className="h-4 w-4" />
+              </button>
+              </div>
           </motion.form>
         </div>
       </div>
