@@ -1,19 +1,50 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     const url = `https://script.google.com/macros/s/AKfycbzaJYziJYfCWBRYzzwcwb6O2qPS4wpfQkZLDECHxMrm0SeB-0wEMcUmMBKy86GbtY08/exec?${new URLSearchParams(formData)}`;
+  //     await fetch(url,
+  //       { mode: 'no-cors',
+  //         method: 'POST',
+  //        });
+  //     toast.success("Thank you! We'll get back to you within 24 hours.");
+  //     setFormData({ Name: "", Email: "", Subject: "", Message: "" });
+  //   } catch (error) {
+  //     toast.error("Failed to send message. Please try again.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic
-    alert("Thank you! We'll get back to you within 24 hours.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+    setIsSubmitting(true);
 
+    try {
+      const url = `https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec?name=${formData.name}&email=${formData.email}&subject=${formData.subject}&message=${formData.message}`;
+      await fetch(url,
+        { mode: 'no-cors',
+          method: 'POST',
+         });
+      toast.success("Thank you! We'll get back to you within 24 hours.");
+      setFormData({ name: "", email: "", subject : "", message: "" });
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
-    <section id="contact" className="section-padding bg-muted/30">
+    <section id="contact" className="section-padding ">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -123,9 +154,10 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              disabled={isSubmitting}
+              className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="h-4 w-4" />
             </button>
           </motion.form>
