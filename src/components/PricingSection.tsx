@@ -30,7 +30,7 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="section-padding bg-muted/30">
+    <section id="pricing" className="section-padding ">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
