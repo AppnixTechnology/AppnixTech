@@ -11,10 +11,13 @@ import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO />
       <Navbar />
       <HeroSection />
       <AboutSection />
@@ -24,10 +27,12 @@ const Index = () => {
       <WhyChooseUsSection />
       <ProcessSection />
       <TestimonialsSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
+            <ContactSection />
+
       <FAQSection />
-      <ContactSection />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

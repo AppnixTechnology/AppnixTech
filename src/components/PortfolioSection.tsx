@@ -2,17 +2,53 @@ import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
 const projects = [
-  { title: "E-Commerce Platform", category: "Web Development", description: "Full-stack marketplace with real-time inventory, payments, and analytics dashboard." },
-  { title: "HealthTech Mobile App", category: "App Development", description: "Cross-platform health monitoring app with AI-powered insights and wearable integration." },
-  { title: "SaaS Dashboard", category: "MERN Stack", description: "Enterprise analytics platform processing millions of data points with real-time visualizations." },
-  { title: "Restaurant Chain Website", category: "WordPress", description: "Multi-location restaurant website with online ordering, reservations, and loyalty program." },
-  { title: "Fintech Brand Identity", category: "Graphic Design", description: "Complete brand overhaul including logo, guidelines, and marketing collateral." },
-  { title: "EdTech Platform UI", category: "UI/UX Design", description: "Learning management system designed for accessibility and engagement across all devices." },
+  {
+    title: "E-Commerce Platform",
+    category: "Full Stack Development",
+    description: "A high-performance marketplace featuring real-time inventory sync, Stripe integration, and a custom merchant analytics dashboard.",
+    image: "/webapp1.jpeg",
+    gradient: "from-blue-600 to-cyan-500"
+  },
+  {
+    title: "HealthTech Mobile App",
+    category: "React Native",
+    description: "Cross-platform health monitoring system with biometric data visualization and AI-powered personalized wellness insights.",
+    image: "/webapp2.jpeg",
+    gradient: "from-green-500 to-emerald-500"
+  },
+  {
+    title: "Enterprise SaaS Dashboard",
+    category: "Data Visualization",
+    description: "Complex analytics platform processing millions of data points with interactive charts and real-time operational monitoring.",
+    image: "/webapp3.png",
+    gradient: "from-purple-600 to-pink-500"
+  },
+  {
+    title: "Culinary Brand Experience",
+    category: "WordPress / Headless",
+    description: "A multi-location restaurant digital presence featuring custom reservation logic and a high-conversion online ordering flow.",
+    image: "/webapp1.jpeg",
+    gradient: "from-orange-500 to-red-500"
+  },
+  {
+    title: "Fintech Brand Identity",
+    category: "Brand Design",
+    description: "Comprehensive visual identity system for a modern neobank, including logo architecture, typography, and digital assets.",
+    image: "/webapp2.jpeg",
+    gradient: "from-indigo-600 to-blue-500"
+  },
+  {
+    title: "EdTech Learning System",
+    category: "UI/UX Design",
+    description: "User-centric LMS platform designed for accessibility, featuring gamified progress tracking and collaborative study tools.",
+    image: "/webapp3.jpeg",
+    gradient: "from-teal-500 to-cyan-500"
+  },
 ];
 
 const PortfolioSection = () => {
   return (
-    <section id="portfolio" className="section-padding bg-muted/30">
+    <section id="portfolio" className="section-padding">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,20 +73,56 @@ const PortfolioSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="glass-card overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300"
+              className="glass-card overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300 h-full flex flex-col"
             >
-              <div className="h-48 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <span className="text-4xl font-heading font-bold text-primary/30 group-hover:text-primary/50 transition-colors">
-                  {project.title.charAt(0)}
-                </span>
+              {/* Image Container */}
+              <div className="relative h-48 overflow-hidden">
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {/* Overlay Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}></div>
+
+                {/* Category Badge */}
+                <div className="absolute top-3 right-3">
+                  <motion.span
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="px-3 py-1 bg-primary/90 backdrop-blur-md text-primary-foreground text-xs font-semibold rounded-full"
+                  >
+                    {project.category}
+                  </motion.span>
+                </div>
               </div>
-              <div className="p-6">
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider">{project.category}</span>
-                <h3 className="text-lg font-heading font-semibold mt-2 mb-2 flex items-center gap-2">
+
+              {/* Content Container */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-lg font-heading font-semibold mb-2 flex items-center gap-2 group">
                   {project.title}
-                  <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <motion.div
+                    initial={{ opacity: 0, x: -5 }}
+                    whileHover={{ opacity: 1, x: 0 }}
+                    className="inline-block"
+                  >
+                    <ExternalLink className="h-4 w-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.div>
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                  {project.description}
+                </p>
+
+                {/* CTA Link */}
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-4 text-primary font-semibold text-sm flex items-center gap-2 hover:gap-3 transition-all duration-300"
+                >
+                  View Case Study
+                  <ExternalLink className="h-3 w-3" />
+                </motion.button>
               </div>
             </motion.div>
           ))}

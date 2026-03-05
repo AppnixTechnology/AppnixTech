@@ -1,16 +1,51 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic
-    alert("Thank you! We'll get back to you within 24 hours.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+  // Your Google Apps Script endpoint
+// 1. Update your URL constant
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec";
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitStatus(null);
+
+  try {
+    // Apps Script handles URLSearchParams very well
+    const params = new URLSearchParams();
+    params.append("name", formData.name);
+    params.append("email", formData.email);
+    params.append("phone", formData.phone);
+    params.append("subject", formData.subject);
+    params.append("message", formData.message);
+
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors", // Keeps it simple for Apps Script
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    });
+
+    // Since mode is 'no-cors', we assume success if no error is thrown
+    setSubmitStatus("success");
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    setTimeout(() => setSubmitStatus(null), 5000);
+
+  } catch (error) {
+    console.error("Submission error:", error);
+    setSubmitStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section id="contact" className="section-padding bg-muted/30">
@@ -39,9 +74,9 @@ const ContactSection = () => {
             className="lg:col-span-2 space-y-8"
           >
             {[
-              { icon: Mail, label: "Email Us", value: "hello@appnix.com", href: "mailto:hello@appnix.com" },
-              { icon: Phone, label: "Call Us", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-              { icon: MapPin, label: "Visit Us", value: "San Francisco, CA 94102" },
+              { icon: Mail, label: "Email Us", value: "info@appnix.com", href: "mailto:info@appnix.com" },
+              { icon: Phone, label: "Call Us", value: "+91 7753983175", href: "tel:+917753983175" },
+              { icon: MapPin, label: "Visit Us", value: "Lucknow, Uttar Pradesh, India" },
             ].map((item) => (
               <div key={item.label} className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -75,6 +110,30 @@ const ContactSection = () => {
             onSubmit={handleSubmit}
             className="lg:col-span-3 glass-card p-8 space-y-5"
           >
+            {/* Success Message */}
+            {submitStatus === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700"
+              >
+                <CheckCircle className="h-5 w-5 shrink-0" />
+                <span className="text-sm font-medium">Message sent successfully! We'll be in touch soon.</span>
+              </motion.div>
+            )}
+
+            {/* Error Message */}
+            {submitStatus === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700"
+              >
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <span className="text-sm font-medium">Failed to send message. Please try again.</span>
+              </motion.div>
+            )}
+
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="text-sm font-medium mb-2 block">Full Name</label>
@@ -82,16 +141,9 @@ const ContactSection = () => {
                   type="text"
                   required
                   value={formData.name}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    // Sirf letters aur space allow karega
-                    if (/^[A-Za-z\s]*$/.test(value)) {
-                      setFormData({ ...formData, name: value });
-                    }
-                  }}
-                  pattern="^[A-Za-z\s]+$"
-                  title="Only letters are allowed"
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
                   placeholder="John Doe"
                 />
               </div>
@@ -102,52 +154,57 @@ const ContactSection = () => {
                   type="email"
                   required
                   value={formData.email}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    // Email first character letter ya number hona chahiye
-                    if (/^[A-Za-z0-9][A-Za-z0-9._%+-@]*$/.test(value) || value === "") {
-                      setFormData({ ...formData, email: value });
-                    }
-                  }}
-                  pattern="^[A-Za-z0-9][A-Za-z0-9._%+-]*@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
-                  title="Enter a valid email address"
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
                   placeholder="john@example.com"
                 />
               </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">Subject</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">Message</label>
-                <textarea
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-              >
-                Send Message
-                <Send className="h-4 w-4" />
-              </button>
-              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Phone</label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                disabled={isSubmitting}
+                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                placeholder="+1 (234) 567-890"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Subject</label>
+              <input
+                type="text"
+                required
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                disabled={isSubmitting}
+                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                placeholder="Project Inquiry"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Message</label>
+              <textarea
+                required
+                rows={5}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                disabled={isSubmitting}
+                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none disabled:opacity-50"
+                placeholder="Tell us about your project..."
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+              <Send className="h-4 w-4" />
+            </button>
           </motion.form>
         </div>
       </div>
