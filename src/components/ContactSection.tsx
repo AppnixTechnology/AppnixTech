@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-reac
 import { useState } from "react";
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
 
@@ -21,6 +21,7 @@ const handleSubmit = async (e) => {
     const params = new URLSearchParams();
     params.append("name", formData.name);
     params.append("email", formData.email);
+    params.append("phone", formData.phone);
     params.append("subject", formData.subject);
     params.append("message", formData.message);
 
@@ -35,7 +36,7 @@ const handleSubmit = async (e) => {
 
     // Since mode is 'no-cors', we assume success if no error is thrown
     setSubmitStatus("success");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     setTimeout(() => setSubmitStatus(null), 5000);
 
   } catch (error) {
@@ -158,6 +159,18 @@ const handleSubmit = async (e) => {
                   placeholder="john@example.com"
                 />
               </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium mb-2 block">Phone</label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                disabled={isSubmitting}
+                className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
+                placeholder="+1 (234) 567-890"
+              />
             </div>
             <div>
               <label className="text-sm font-medium mb-2 block">Subject</label>
