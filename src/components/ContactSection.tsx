@@ -8,44 +8,44 @@ const ContactSection = () => {
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
 
   // Your Google Apps Script endpoint
-// 1. Update your URL constant
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec";
+  // 1. Update your URL constant
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec";
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setSubmitStatus(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-  try {
-    // Apps Script handles URLSearchParams very well
-    const params = new URLSearchParams();
-    params.append("name", formData.name);
-    params.append("email", formData.email);
-    params.append("phone", formData.phone);
-    params.append("subject", formData.subject);
-    params.append("message", formData.message);
+    try {
+      // Apps Script handles URLSearchParams very well
+      const params = new URLSearchParams();
+      params.append("name", formData.name);
+      params.append("email", formData.email);
+      params.append("phone", formData.phone);
+      params.append("subject", formData.subject);
+      params.append("message", formData.message);
 
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors", // Keeps it simple for Apps Script
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    });
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Keeps it simple for Apps Script
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      });
 
-    // Since mode is 'no-cors', we assume success if no error is thrown
-    setSubmitStatus("success");
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setTimeout(() => setSubmitStatus(null), 5000);
+      // Since mode is 'no-cors', we assume success if no error is thrown
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setTimeout(() => setSubmitStatus(null), 5000);
 
-  } catch (error) {
-    console.error("Submission error:", error);
-    setSubmitStatus("error");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="section-padding bg-muted/30">
@@ -141,13 +141,17 @@ const handleSubmit = async (e) => {
                   type="text"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (/^[A-Za-z\s]*$/.test(value)) {   // only characters + space allowed
+                      setFormData({ ...formData, name: value });
+                    }
+                  }}
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
                   placeholder="John Doe"
                 />
               </div>
-
               <div>
                 <label className="text-sm font-medium mb-2 block">Email</label>
                 <input
@@ -167,10 +171,15 @@ const handleSubmit = async (e) => {
                 type="tel"
                 required
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[0-9]*$/.test(value)) {   // only numbers allowed
+                    setFormData({ ...formData, phone: value });
+                  }
+                }}
                 disabled={isSubmitting}
                 className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all disabled:opacity-50"
-                placeholder="+1 (234) 567-890"
+                placeholder="1234567890"
               />
             </div>
             <div>
