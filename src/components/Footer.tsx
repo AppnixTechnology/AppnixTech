@@ -13,19 +13,22 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="text-2xl font-heading font-bold gradient-text mb-4">Appnix</h3>
+            <h3 className="text-2xl font-heading font-bold gradient-text mb-4">
+              <img src="/logo.png" alt="Appnix Logo" className="h-14 w-auto inline-block mr-2 rounded-full" />
+              Appnix Technologies
+            </h3>
             <p className="text-muted-foreground max-w-sm mb-6 text-sm leading-relaxed">
               Transforming ideas into exceptional digital experiences. We build scalable, modern technology solutions for businesses worldwide.
             </p>
             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-              <a href="mailto:hello@appnix.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                <Mail className="h-4 w-4 text-primary" /> hello@appnix.com
+              <a href="mailto:info@appnix.com" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <Mail className="h-4 w-4 text-primary" /> info@appnix.com
               </a>
-              <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                <Phone className="h-4 w-4 text-primary" /> +1 (234) 567-890
+              <a href="tel:+17753983175" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <Phone className="h-4 w-4 text-primary" /> 7753983175
               </a>
               <span className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" /> San Francisco, CA
+                <MapPin className="h-4 w-4 text-primary" /> Lucknow Uttar Pradesh India
               </span>
             </div>
           </div>
@@ -52,11 +55,15 @@ const Footer = () => {
             © 2026 Appnix Technologies. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {["Twitter", "LinkedIn", "GitHub", "Dribbble"].map((social) => (
-              <a key={social} href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                {social}
-              </a>
-            ))}
+            <a href="https://twitter.com/appnixtech" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              Twitter
+            </a>
+            <a href="https://www.linkedin.com/company/appnix-technologies" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              LinkedIn
+            </a>
+            <a href="https://dribbble.com/appnixtech" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              Dribbble
+            </a>
           </div>
         </div>
       </div>

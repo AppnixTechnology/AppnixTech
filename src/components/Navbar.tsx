@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
+  // { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -24,8 +24,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container-custom flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="text-2xl font-heading font-bold gradient-text">
-          Appnix
+        <a href="#" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Appnix Technologies" className="h-10 w-auto" />
         </a>
 
         {/* Desktop Nav */}

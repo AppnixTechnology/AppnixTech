@@ -74,9 +74,9 @@ const handleSubmit = async (e) => {
             className="lg:col-span-2 space-y-8"
           >
             {[
-              { icon: Mail, label: "Email Us", value: "hello@appnix.com", href: "mailto:hello@appnix.com" },
-              { icon: Phone, label: "Call Us", value: "+1 (234) 567-890", href: "tel:+1234567890" },
-              { icon: MapPin, label: "Visit Us", value: "San Francisco, CA 94102" },
+              { icon: Mail, label: "Email Us", value: "info@appnix.com", href: "mailto:info@appnix.com" },
+              { icon: Phone, label: "Call Us", value: "+91 7753983175", href: "tel:+917753983175" },
+              { icon: MapPin, label: "Visit Us", value: "Lucknow, Uttar Pradesh, India" },
             ].map((item) => (
               <div key={item.label} className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
