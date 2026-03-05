@@ -8,44 +8,44 @@ const ContactSection = () => {
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
 
   // Your Google Apps Script endpoint
-// 1. Update your URL constant
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec";
+  // 1. Update your URL constant
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIi-Z7uazE8JTbsAgjjpoQZbcFrvJBZlHyF__AA3QeGPWfXZnYizC3ypuomJLf7jWhag/exec";
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setSubmitStatus(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-  try {
-    // Apps Script handles URLSearchParams very well
-    const params = new URLSearchParams();
-    params.append("name", formData.name);
-    params.append("email", formData.email);
-    params.append("phone", formData.phone);
-    params.append("subject", formData.subject);
-    params.append("message", formData.message);
+    try {
+      // Apps Script handles URLSearchParams very well
+      const params = new URLSearchParams();
+      params.append("name", formData.name);
+      params.append("email", formData.email);
+      params.append("phone", formData.phone);
+      params.append("subject", formData.subject);
+      params.append("message", formData.message);
 
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors", // Keeps it simple for Apps Script
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    });
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // Keeps it simple for Apps Script
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      });
 
-    // Since mode is 'no-cors', we assume success if no error is thrown
-    setSubmitStatus("success");
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setTimeout(() => setSubmitStatus(null), 5000);
+      // Since mode is 'no-cors', we assume success if no error is thrown
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setTimeout(() => setSubmitStatus(null), 5000);
 
-  } catch (error) {
-    console.error("Submission error:", error);
-    setSubmitStatus("error");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="section-padding bg-muted/30">
@@ -154,7 +154,6 @@ const handleSubmit = async (e) => {
                   placeholder="John Doe"
                 />
               </div>
-
               <div>
                 <label className="text-sm font-medium mb-2 block">Email</label>
                 <input
