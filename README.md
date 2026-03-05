@@ -1,233 +1,232 @@
-# AppnixTech UI README
+# AppnixTech - Modern Web Development Agency Website
 
-This document explains the UI system of this project so it is easy to understand, maintain, and prompt against.
+A modern, responsive web development agency website built with React, TypeScript, and Tailwind CSS featuring smooth animations and dark/light theme support.
 
-## 1. UI Overview
+## 🚀 Features
 
-The app is a single-page marketing site with section-based navigation.
+- **Responsive Design** - Mobile-first approach, works on all devices
+- **Dark/Light Theme** - Seamless theme switching with persistent preferences
+- **Smooth Animations** - Framer Motion powered animations throughout
+- **Glass Morphism UI** - Modern glassmorphic design elements
+- **Contact Form Integration** - Google Sheets integration for form submissions
+- **SEO Optimized** - Clean semantic HTML structure
+- **Fast Performance** - Built with Vite for optimal loading speeds
 
-Main route: `/`
+## 🎨 Design System
 
-Section order in `src/pages/Index.tsx`:
-1. Navbar
-2. HeroSection
-3. AboutSection
-4. ServicesSection
-5. TechStackSection
-6. PortfolioSection
-7. WhyChooseUsSection
-8. ProcessSection
-9. TestimonialsSection
-10. ContactSection
-11. FAQSection
-12. Footer
+### Color Palette
 
-## 2. UI Libraries Used
+#### Light Theme
+- **Background**: `hsl(220, 20%, 97%)` - Light grayish blue
+- **Foreground**: `hsl(230, 25%, 12%)` - Dark blue-gray
+- **Primary**: `hsl(190, 95%, 42%)` - Cyan blue
+- **Accent**: `hsl(270, 80%, 60%)` - Purple
+- **Muted**: `hsl(220, 14%, 95%)` - Light gray
+- **Border**: `hsl(220, 14%, 90%)` - Subtle gray
 
-Core UI stack:
-- React 18 + TypeScript + Vite
-- Tailwind CSS
-- shadcn/ui component patterns
-- Radix UI primitives (`@radix-ui/*`)
-- `class-variance-authority`, `clsx`, `tailwind-merge`
+#### Dark Theme
+- **Background**: `hsl(230, 25%, 7%)` - Very dark blue
+- **Foreground**: `hsl(210, 40%, 96%)` - Off white
+- **Primary**: `hsl(190, 95%, 50%)` - Bright cyan
+- **Accent**: `hsl(270, 80%, 65%)` - Bright purple
+- **Muted**: `hsl(230, 18%, 14%)` - Dark gray
+- **Border**: `hsl(230, 18%, 18%)` - Subtle dark gray
 
-Animation + motion:
-- `framer-motion` for section entry/stagger/menu transitions
-- `tailwindcss-animate` for Radix data-state animations (dialog, popover, dropdown, etc.)
-- Custom Tailwind keyframes in `tailwind.config.ts`
+### Typography
+- **Heading Font**: Space Grotesk (400, 500, 600, 700)
+- **Body Font**: Inter (300-900)
 
-Icons + visual utilities:
-- `lucide-react`
-- `sonner` + shadcn toast
+### Custom CSS Classes
+- `.glass-card` - Glassmorphic card with backdrop blur
+- `.gradient-text` - Cyan to purple gradient text
+- `.glow-effect` - Glowing shadow effect
+- `.section-padding` - Responsive section spacing
+- `.container-custom` - Responsive container with padding
 
-Theme:
-- Dark mode via `class="dark"` strategy in Tailwind (`darkMode: ["class"]`)
-- Theme toggle implemented in `src/components/ThemeToggle.tsx`
-- `next-themes` is installed and used by `src/components/ui/sonner.tsx`
+## 📦 Tech Stack
 
-## 3. Animation Features (Implemented)
+### Core
+- **React 18.3** - UI library
+- **TypeScript 5.8** - Type safety
+- **Vite 5.4** - Build tool
+- **React Router 6.30** - Routing
 
-### 3.1 Framer Motion (section and layout animations)
-Used in:
-- `HeroSection.tsx`
-- `Navbar.tsx` (`AnimatePresence` for mobile menu)
-- `AboutSection.tsx`
-- `ServicesSection.tsx`
-- `TechStackSection.tsx`
-- `PortfolioSection.tsx`
-- `WhyChooseUsSection.tsx`
-- `ProcessSection.tsx`
-- `TestimonialsSection.tsx`
-- `PricingSection.tsx`
-- `FAQSection.tsx`
-- `ContactSection.tsx`
+### Styling
+- **Tailwind CSS 3.4** - Utility-first CSS
+- **tailwindcss-animate** - Animation utilities
+- **Framer Motion 12.34** - Animation library
 
-Typical motion patterns:
-- Fade + slide up: `initial { opacity: 0, y: 20/30 } -> animate { opacity: 1, y: 0 }`
-- Scale-in for badges/chips: `initial { scale: 0.9 } -> animate { scale: 1 }`
-- Staggered cards via transition delays (`i * 0.04`, `i * 0.08`, `i * 0.1`, etc.)
-- Mobile nav open/close height transition with `AnimatePresence`
+### UI Components
+- **Radix UI** - Headless accessible components
+- **Lucide React** - Icon library
+- **Sonner** - Toast notifications
+- **shadcn/ui** - Component collection
 
-### 3.2 Tailwind custom keyframes and utility animations
-Defined in `tailwind.config.ts`:
-- `accordion-down`
-- `accordion-up`
-- `fade-in`
-- `fade-in-left`
-- `float`
-- `pulse-glow`
+### Form & Validation
+- **React Hook Form 7.61** - Form management
+- **Zod 3.25** - Schema validation
 
-Mapped animation utilities:
-- `animate-accordion-down`
-- `animate-accordion-up`
-- `animate-fade-in`
-- `animate-fade-in-left`
-- `animate-float`
-- `animate-pulse-glow`
+### Theme
+- **next-themes 0.3** - Theme management
 
-### 3.3 Radix state animations
-UI primitives use state-driven classes like:
-- `data-[state=open]:animate-in`
-- `data-[state=closed]:animate-out`
-- `fade-in-0`, `fade-out-0`
-- `zoom-in-95`, `zoom-out-95`
-- `slide-in-from-*`, `slide-out-to-*`
+## 🎬 Animations
 
-These are provided by `tailwindcss-animate` and used in dialog, sheet, popover, dropdown, tooltip, toast, etc.
+### Framer Motion Animations Used
 
-## 4. Color System and Theme Tokens
+#### 1. **Fade In (Y-axis)**
+```tsx
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+```
+Used in: Section headers, content blocks
 
-Theme tokens are defined in `src/index.css` and consumed as HSL variables in Tailwind.
+#### 2. **Fade In (X-axis)**
+```tsx
+initial={{ opacity: 0, x: -20 }} // or x: 20
+whileInView={{ opacity: 1, x: 0 }}
+```
+Used in: Side-by-side content, contact info
 
-### 4.1 Light theme (`:root`)
-- `--background: 220 20% 97%`
-- `--foreground: 230 25% 12%`
-- `--card: 0 0% 100%`
-- `--card-foreground: 230 25% 12%`
-- `--popover: 0 0% 100%`
-- `--popover-foreground: 230 25% 12%`
-- `--primary: 190 95% 42%`
-- `--primary-foreground: 0 0% 100%`
-- `--secondary: 220 14% 92%`
-- `--secondary-foreground: 230 25% 12%`
-- `--muted: 220 14% 95%`
-- `--muted-foreground: 220 10% 46%`
-- `--accent: 270 80% 60%`
-- `--accent-foreground: 0 0% 100%`
-- `--destructive: 0 84% 60%`
-- `--destructive-foreground: 0 0% 100%`
-- `--border: 220 14% 90%`
-- `--input: 220 14% 90%`
-- `--ring: 190 95% 42%`
-- `--radius: 0.75rem`
+#### 3. **Scale Animation**
+```tsx
+initial={{ opacity: 0, scale: 0.9 }}
+whileInView={{ opacity: 1, scale: 1 }}
+transition={{ delay: i * 0.04 }}
+```
+Used in: Tech stack cards, service cards
 
-Extra visual tokens:
-- `--gradient-primary: linear-gradient(135deg, hsl(190, 95%, 42%), hsl(270, 80%, 60%))`
-- `--gradient-card: linear-gradient(135deg, hsl(220, 14%, 96%), hsl(220, 14%, 100%))`
-- `--shadow-glow: 0 0 40px -10px hsl(190 95% 42% / 0.2)`
-- `--shadow-card: 0 4px 24px -4px hsl(230 25% 12% / 0.06)`
+#### 4. **Stagger Children**
+```tsx
+transition={{ delay: i * 0.15, duration: 0.5 }}
+```
+Used in: Pricing cards, feature lists
 
-### 4.2 Dark theme (`.dark`)
-- `--background: 230 25% 7%`
-- `--foreground: 210 40% 96%`
-- `--card: 230 22% 10%`
-- `--card-foreground: 210 40% 96%`
-- `--popover: 230 22% 10%`
-- `--popover-foreground: 210 40% 96%`
-- `--primary: 190 95% 50%`
-- `--primary-foreground: 230 25% 7%`
-- `--secondary: 230 18% 16%`
-- `--secondary-foreground: 210 40% 96%`
-- `--muted: 230 18% 14%`
-- `--muted-foreground: 220 10% 55%`
-- `--accent: 270 80% 65%`
-- `--accent-foreground: 0 0% 100%`
-- `--destructive: 0 62% 30%`
-- `--destructive-foreground: 210 40% 98%`
-- `--border: 230 18% 18%`
-- `--input: 230 18% 18%`
-- `--ring: 190 95% 50%`
+### Tailwind Animations
 
-Dark mode visual tokens:
-- `--gradient-primary: linear-gradient(135deg, hsl(190, 95%, 50%), hsl(270, 80%, 65%))`
-- `--gradient-card: linear-gradient(135deg, hsl(230, 22%, 12%), hsl(230, 22%, 15%))`
-- `--shadow-glow: 0 0 60px -10px hsl(190 95% 50% / 0.3)`
-- `--shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.3)`
+#### Custom Keyframes
+- `fade-in` - Fade in with Y translation
+- `fade-in-left` - Fade in with X translation
+- `float` - Floating effect (up/down)
+- `pulse-glow` - Pulsing glow shadow
+- `accordion-down/up` - Accordion animations
 
-### 4.3 Sidebar tokens
-Separate tokens exist for sidebar palette:
-- `--sidebar-background`
-- `--sidebar-foreground`
-- `--sidebar-primary`
-- `--sidebar-primary-foreground`
-- `--sidebar-accent`
-- `--sidebar-accent-foreground`
-- `--sidebar-border`
-- `--sidebar-ring`
+## 📂 Project Structure
 
-## 5. Shared UI Utility Classes
-
-From `src/index.css`:
-- `.glass-card`: translucent card with blur + border + card shadow
-- `.gradient-text`: primary gradient text treatment
-- `.gradient-border`: gradient outline via masked pseudo-element
-- `.glow-effect`: glow shadow for primary CTAs
-- `.section-padding`: standard vertical spacing
-- `.container-custom`: responsive horizontal container
-
-## 6. Typography
-
-Configured in `tailwind.config.ts`:
-- Heading: `"Space Grotesk"`
-- Body: `"Inter"`
-
-Applied globally:
-- `body` uses `font-body`
-- `h1-h6` use `font-heading`
-
-## 7. Theme Behavior
-
-Current behavior in `ThemeToggle.tsx`:
-- Theme state is local (`isDark`), default `true`
-- `.dark` class is applied/removed on `document.documentElement`
-- App boots in dark mode by default (`document.documentElement.classList.add("dark")`)
-- Toggle icon animation uses rotate + scale transitions for Sun/Moon swap
-
-## 8. Prompt-Ready UI Spec
-
-Use this when asking for new UI work in this repo:
-
-```text
-Build [SECTION/COMPONENT] for AppnixTech using existing UI language.
-
-Constraints:
-- Keep Tailwind token usage (`bg-background`, `text-foreground`, `border-border`, `text-muted-foreground`, `bg-primary`, `text-primary-foreground`).
-- Support both light and dark themes via existing CSS variables in `src/index.css`.
-- Use Framer Motion for entry animation (fade + y offset), duration 0.5-0.8s.
-- Reuse utility classes: glass-card, gradient-text, glow-effect, container-custom, section-padding.
-- Match typography: heading = Space Grotesk, body = Inter.
-- Mobile first; ensure layout remains clean on small screens.
-- Keep interaction transitions subtle (`transition-all duration-300`).
-
-Deliver:
-1) Component TSX
-2) Any required token/class updates (only if needed)
-3) Short explanation of animation + theme compliance
+```
+AppnixTech/
+├── src/
+│   ├── components/
+│   │   ├── ui/              # shadcn/ui components
+│   │   ├── AboutSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── FAQSection.tsx
+│   │   ├── Footer.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── PortfolioSection.tsx
+│   │   ├── PricingSection.tsx
+│   │   ├── ProcessSection.tsx
+│   │   ├── ServicesSection.tsx
+│   │   ├── TechStackSection.tsx
+│   │   ├── TestimonialsSection.tsx
+│   │   ├── ThemeToggle.tsx
+│   │   └── WhyChooseUsSection.tsx
+│   ├── pages/
+│   │   ├── Index.tsx
+│   │   └── NotFound.tsx
+│   ├── hooks/
+│   ├── lib/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── public/
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+└── vite.config.ts
 ```
 
-## 9. Quick Dev Commands
+## 🛠️ Installation & Setup
 
-From project root:
-- `npm install`
-- `npm run dev`
-- `npm run build`
-- `npm run test`
+```bash
+# Install dependencies
+npm install
 
-## 10. Key Files
+# Run development server
+npm run dev
 
-- `src/pages/Index.tsx` - section composition order
-- `src/components/ThemeToggle.tsx` - dark/light toggle logic
-- `src/index.css` - full theme token system and utility classes
-- `tailwind.config.ts` - theme mapping, keyframes, animations
-- `src/components/*Section.tsx` - motion-enabled content sections
-- `src/components/ui/*` - reusable primitives and Radix animated components
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run tests
+npm run test
+```
+
+## 🔧 Configuration
+
+### Google Sheets Integration
+
+Update the Google Apps Script URL in `ContactSection.tsx`:
+
+```typescript
+const url = `https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?...`;
+```
+
+### Theme Customization
+
+Edit `tailwind.config.ts` and `src/index.css` to customize colors, fonts, and animations.
+
+## 📱 Sections
+
+1. **Hero** - Main landing section with CTA
+2. **Services** - Service offerings with icons
+3. **About** - Company information
+4. **Why Choose Us** - Key differentiators
+5. **Process** - Development workflow
+6. **Tech Stack** - Technologies used
+7. **Portfolio** - Project showcase
+8. **Testimonials** - Client reviews
+9. **Pricing** - Service packages
+10. **FAQ** - Common questions
+11. **Contact** - Contact form with Google Sheets integration
+12. **Footer** - Links and social media
+
+## 🎯 Key Components
+
+### Glass Card Effect
+```css
+.glass-card {
+  background: card/60%;
+  backdrop-blur: xl;
+  border: 1px solid border/50%;
+  border-radius: 1rem;
+}
+```
+
+### Gradient Text
+```css
+.gradient-text {
+  background: linear-gradient(135deg, cyan, purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+```
+
+## 🌐 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📄 License
+
+Private - All rights reserved
+
+## 👥 Contact
+
+For inquiries, use the contact form on the website or reach out via email.
