@@ -14,7 +14,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-heading font-bold gradient-text mb-4">
-              <img src="/logo.png" alt="Appnix Logo" className="h-14 w-auto inline-block mr-2 rounded-full" />
+              <img src="/logo.png" alt="Appnix Logo" className="h-14 w-14 inline-block mr-2 rounded-full object-cover" />
               Appnix Technologies
             </h3>
             <p className="text-muted-foreground max-w-sm mb-6 text-sm leading-relaxed">
@@ -55,14 +55,14 @@ const Footer = () => {
             © 2026 Appnix Technologies. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="https://twitter.com/appnixtech" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a href="https://x.com/AppnixTech" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Twitter
             </a>
             <a href="https://www.linkedin.com/company/appnix-technologies" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               LinkedIn
             </a>
-            <a href="https://dribbble.com/appnixtech" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Dribbble
+            <a href="https://www.instagram.com/appnixtechnologies" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              Instagram
             </a>
           </div>
         </div>

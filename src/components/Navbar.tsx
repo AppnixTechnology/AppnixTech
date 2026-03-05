@@ -25,7 +25,8 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container-custom flex items-center justify-between h-16 md:h-20">
         <a href="#" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Appnix Technologies" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Appnix Technologies" className="h-10 w-10 rounded-full object-cover" />
+          <span className="text-2xl font-heading font-bold gradient-text">Appnix</span>
         </a>
 
         {/* Desktop Nav */}
