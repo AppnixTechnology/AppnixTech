@@ -64,6 +64,9 @@ const Footer = () => {
             <a href="https://www.instagram.com/appnixtechnologies" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Instagram
             </a>
+            <a href="https://www.facebook.com/people/Appnix-Technologies/61587716594443" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              Facebook
+            </a>
           </div>
         </div>
       </div>
