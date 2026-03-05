@@ -109,7 +109,7 @@ const TechStackSection = () => {
             return (
               <motion.div
                 key={tech.name}
-                variants={itemVariants}
+                // variants={itemVariants}
                 whileHover={{
                   y: -8,
                   transition: { duration: 0.2 },
