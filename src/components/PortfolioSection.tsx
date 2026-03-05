@@ -20,7 +20,7 @@ const projects = [
     title: "Enterprise SaaS Dashboard",
     category: "Data Visualization",
     description: "Complex analytics platform processing millions of data points with interactive charts and real-time operational monitoring.",
-    image: "/webapp3.png",
+    image: "/saas.png",
     gradient: "from-purple-600 to-pink-500"
   },
   {
@@ -34,14 +34,14 @@ const projects = [
     title: "Fintech Brand Identity",
     category: "Brand Design",
     description: "Comprehensive visual identity system for a modern neobank, including logo architecture, typography, and digital assets.",
-    image: "/webapp2.jpeg",
+    image: "web5fintech.png",
     gradient: "from-indigo-600 to-blue-500"
   },
   {
     title: "EdTech Learning System",
     category: "UI/UX Design",
     description: "User-centric LMS platform designed for accessibility, featuring gamified progress tracking and collaborative study tools.",
-    image: "/webapp3.jpeg",
+    image: "web4edtech.png",
     gradient: "from-teal-500 to-cyan-500"
   },
 ];
