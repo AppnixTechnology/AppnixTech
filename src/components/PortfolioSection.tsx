@@ -6,14 +6,14 @@ const projects = [
     title: "E-Commerce Platform",
     category: "Full Stack Development",
     description: "A high-performance marketplace featuring real-time inventory sync, Stripe integration, and a custom merchant analytics dashboard.",
-    image: "/webapp1.jpeg",
+    image: "/webapp1.png",
     gradient: "from-blue-600 to-cyan-500"
   },
   {
     title: "HealthTech Mobile App",
     category: "React Native",
     description: "Cross-platform health monitoring system with biometric data visualization and AI-powered personalized wellness insights.",
-    image: "/webapp2.jpeg",
+    image: "/Health.png",
     gradient: "from-green-500 to-emerald-500"
   },
   {
